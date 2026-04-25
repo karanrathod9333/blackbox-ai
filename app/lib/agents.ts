@@ -83,15 +83,51 @@ export function complianceAgent(data: any) {
 
 export async function proposalWriterAgent(data: any) {
   const prompt = `
-Create a professional RFP proposal response.
-
-Tender Title: ${data.tenderTitle}
-Organization: ${data.organization}
-Scope: ${data.scope}
-Technical: ${data.technical}
-Commercial: ${data.commercial}
-Legal: ${data.legal}
-`;
+  You are Blackbox AI, a professional Business Analyst and RFP Proposal Writer.
+  
+  Your task is to generate a proposal response STRICTLY based on the tender details below.
+  
+  TENDER DETAILS:
+  Tender Title: ${data.tenderTitle}
+  Issuing Organization: ${data.organization}
+  Contract Value/Budget: ${data.contractValue}
+  Submission Deadline: ${data.deadline}
+  
+  Scope of Work:
+  ${data.scope}
+  
+  Eligibility Criteria:
+  ${data.eligibility}
+  
+  Technical Requirements:
+  ${data.technical}
+  
+  Commercial Requirements:
+  ${data.commercial}
+  
+  Legal Terms:
+  ${data.legal}
+  
+  IMPORTANT RULES:
+  1. Do not write generic content.
+  2. Do not add services not mentioned in the tender.
+  3. Match the proposal to the exact tender requirements.
+  4. Mention healthcare, appointment management, patient records, EHR, notifications, admin dashboard, HIPAA, uptime, backups only if they appear in the tender details.
+  5. Use professional business language.
+  
+  OUTPUT FORMAT:
+  1. Executive Summary
+  2. Understanding of Tender Requirements
+  3. Proposed Solution
+  4. Technical Approach
+  5. Implementation Timeline
+  6. Compliance and Security Approach
+  7. Commercial Approach
+  8. Risk Management
+  9. Conclusion
+  
+  Now generate the proposal response.
+  `;
 
   return await aiAgent(prompt);
 }
